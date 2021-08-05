@@ -15,6 +15,26 @@ import javax.servlet.http.HttpServletRequest
 @RestControllerAdvice
 class ExceptionHandlerAdvice(private val messageSource: MessageSource) {
 
+    /**
+     * Handle for application's errors
+     * Return HttpStatus 500 - INTERNAL SERVER ERROR
+     * */
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception::class)
+    fun handleServerErrorException(
+        exception: Exception,
+        request: HttpServletRequest
+    ): ExceptionResponse {
+
+        return ExceptionResponse(
+            status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            field = "",
+            error = HttpStatus.INTERNAL_SERVER_ERROR.name,
+            message = exception.message!!,
+            path = request.servletPath
+        )
+    }
+
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidationException(
@@ -55,6 +75,8 @@ class ExceptionHandlerAdvice(private val messageSource: MessageSource) {
         )
 
     }
+
+
 
 }
 
