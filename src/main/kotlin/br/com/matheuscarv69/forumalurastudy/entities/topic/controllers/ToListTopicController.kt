@@ -1,6 +1,8 @@
-package br.com.matheuscarv69.forumalurastudy.entities.topic.model
+package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 
 import br.com.matheuscarv69.forumalurastudy.entities.course.model.Course
+import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Answer
+import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Topic
 import br.com.matheuscarv69.forumalurastudy.entities.topic.response.TopicResponse
 import br.com.matheuscarv69.forumalurastudy.entities.user.model.User
 import org.springframework.http.ResponseEntity
