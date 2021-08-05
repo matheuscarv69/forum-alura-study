@@ -6,14 +6,17 @@ import br.com.matheuscarv69.forumalurastudy.entities.user.model.User
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Positive
+import javax.validation.constraints.Size
 
 
 data class TopicRequest(
 
     @field:NotBlank
+    @field:Size(min = 5, max = 100)
     val title: String,
 
     @field:NotBlank
+    @field:Size(min = 5, max = 1000)
     val message: String,
 
     @field:NotNull
