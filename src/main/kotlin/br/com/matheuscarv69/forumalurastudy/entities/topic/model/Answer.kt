@@ -8,6 +8,6 @@ class Answer(
     val message: String,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val author: User,
-    val topic: Topic,
+    var topic: Topic? = null,
     val solution: Boolean
 )
