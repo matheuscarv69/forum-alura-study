@@ -3,6 +3,7 @@ package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 import br.com.matheuscarv69.forumalurastudy.entities.course.model.Course
 import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Topic
 import br.com.matheuscarv69.forumalurastudy.entities.topic.request.TopicRequest
+import br.com.matheuscarv69.forumalurastudy.entities.topic.request.UpdateTopicRequest
 import br.com.matheuscarv69.forumalurastudy.entities.topic.response.TopicResponse
 import br.com.matheuscarv69.forumalurastudy.entities.user.model.User
 import org.slf4j.LoggerFactory
@@ -57,10 +58,7 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
     }
 
     @PostMapping
-    fun createTopic(
-        @RequestBody @Valid request: TopicRequest,
-        uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<Any> {
+    fun createTopic(@RequestBody @Valid request: TopicRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<Any> {
 
         if ((request.courseId == COURSE.id) && (request.userId == AUTHOR.id)) {
             val topic = request.toModel(course = COURSE, author = AUTHOR)
@@ -76,6 +74,24 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
         }
 
         return ResponseEntity.badRequest().body("This course Id or author Id are incorrect")
+    }
+
+    @PutMapping("/{id}")
+    fun updateTopic(@PathVariable id: Long, @RequestBody @Valid request: UpdateTopicRequest): ResponseEntity<Any> {
+
+        topicsList.stream().filter { topic ->
+            topic.id == id
+        }.findFirst().let { isTopic ->
+            if (isTopic.isPresent) {
+                logger.info("Topic id: $id found and update for Topic title: ${request.title}, message: ${request.message}")
+                isTopic.get().title = request.title
+                isTopic.get().message = request.message
+                return ResponseEntity.ok().build()
+            }
+        }
+
+        logger.warn("Topic id: $id not found")
+        return ResponseEntity.notFound().build()
     }
 
 }

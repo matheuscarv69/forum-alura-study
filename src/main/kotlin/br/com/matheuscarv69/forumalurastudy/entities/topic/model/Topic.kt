@@ -6,8 +6,8 @@ import java.time.LocalDateTime
 
 class Topic(
     var id: Long? = null,
-    val title: String,
-    val message: String,
+    var title: String,
+    var message: String,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val course: Course,
     val author: User,
