@@ -1,5 +1,6 @@
 package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 
+import br.com.matheuscarv69.forumalurastudy.configs.exception.TopicNotFoundException
 import br.com.matheuscarv69.forumalurastudy.entities.course.model.Course
 import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Topic
 import br.com.matheuscarv69.forumalurastudy.entities.topic.request.TopicRequest
@@ -45,16 +46,15 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
     @GetMapping("/{id}")
     fun findTopicById(@PathVariable("id") id: Long): ResponseEntity<TopicResponse> {
 
-        topicsList.forEach { topic ->
-            if (topic.id == id) {
-                logger.info("This topic Id: $id found")
-                return ResponseEntity.ok(TopicResponse(topic))
-            }
+        val topicExists = topicsList.stream().filter { topic ->
+            topic.id == id
+        }.findFirst().orElseThrow {
+            logger.info("This topic Id: $id not found")
+            TopicNotFoundException("This Topic ID: $id not found")
         }
 
-        logger.info("This topic Id: $id not found")
-        return ResponseEntity.notFound().build()
-
+        logger.info("This topic Id: $id found")
+        return ResponseEntity.ok(TopicResponse(topicExists))
     }
 
     @PostMapping
@@ -81,17 +81,16 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
 
         topicsList.stream().filter { topic ->
             topic.id == id
-        }.findFirst().let { topicExists ->
-            if (topicExists.isPresent) {
-                logger.info("Topic id: $id found and update for Topic title: ${request.title}, message: ${request.message}")
-                topicExists.get().title = request.title
-                topicExists.get().message = request.message
-                return ResponseEntity.ok().build()
-            }
+        }.findFirst().orElseThrow {
+            logger.info("This topic Id: $id not found")
+            TopicNotFoundException("This Topic ID: $id not found")
+        }.let { topicExists ->
+            logger.info("Topic id: $id found and update for Topic title: ${request.title}, message: ${request.message}")
+            topicExists.title = request.title
+            topicExists.message = request.message
+            return ResponseEntity.ok().build()
         }
 
-        logger.warn("Topic id: $id not found for to update")
-        return ResponseEntity.notFound().build()
     }
 
     @DeleteMapping("/{id}")
@@ -99,16 +98,15 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
 
         topicsList.stream().filter { topic ->
             topic.id == id
-        }.findFirst().let { topicExists ->
-            if (topicExists.isPresent) {
-                logger.info("Topic id: $id found and deleted")
-                topicsList.remove(topicExists.get())
-                return ResponseEntity.ok().build()
-            }
+        }.findFirst().orElseThrow {
+            logger.warn("Topic id: $id not found for to delete")
+            TopicNotFoundException("This Topic ID: $id not found")
+        }.let { topicExists ->
+            logger.info("Topic id: $id found and deleted")
+            topicsList.remove(topicExists)
+            return ResponseEntity.noContent().build()
         }
 
-        logger.warn("Topic id: $id not found for to delete")
-        return ResponseEntity.notFound().build()
     }
 
 }
