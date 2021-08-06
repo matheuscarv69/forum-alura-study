@@ -25,7 +25,7 @@ data class TopicRequest(
 
     @field:NotNull
     @field:Positive
-    val userId: Long,
+    val authorId: Long,
 
     ) {
 

@@ -76,7 +76,39 @@ class ExceptionHandlerAdvice(private val messageSource: MessageSource) {
 
     }
 
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CourseNotFoundException::class)
+    fun handleCourseNotFoundException(
+        exception: CourseNotFoundException,
+        request: HttpServletRequest
+    ): ExceptionResponse {
 
+        return ExceptionResponse(
+            status = HttpStatus.NOT_FOUND.value(),
+            field = "",
+            error = HttpStatus.NOT_FOUND.name,
+            message = exception.message!!,
+            path = request.servletPath
+        )
+
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(AuthorNotFoundException::class)
+    fun handleAuthorNotFoundException(
+        exception: AuthorNotFoundException,
+        request: HttpServletRequest
+    ): ExceptionResponse {
+
+        return ExceptionResponse(
+            status = HttpStatus.NOT_FOUND.value(),
+            field = "",
+            error = HttpStatus.NOT_FOUND.name,
+            message = exception.message!!,
+            path = request.servletPath
+        )
+
+    }
 
 }
 
