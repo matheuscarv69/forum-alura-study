@@ -13,7 +13,7 @@ class Course(
 
     @field:NotBlank
     @field:Size(max = 100)
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     val name: String,
 
     @field:NotBlank

@@ -28,7 +28,10 @@ class CreateTopicController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
-    fun createTopic(@RequestBody @Valid request: TopicRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<Any> {
+    fun createTopic(
+        @RequestBody @Valid request: TopicRequest,
+        uriBuilder: UriComponentsBuilder
+    ): ResponseEntity<Any> {
 
         val course = courseRepository.findById(request.courseId).orElseThrow {
             CourseNotFoundException("This Course ID: ${request.courseId} not found")

@@ -1,9 +1,6 @@
 package br.com.matheuscarv69.forumalurastudy.entities.user.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
@@ -17,9 +14,11 @@ class User(
 
     @field:NotBlank
     @field:Size(max = 100)
+    @Column(nullable = false)
     val name: String,
 
     @field:NotBlank
     @field:Email
+    @Column(nullable = false, unique = true)
     val email: String
 )

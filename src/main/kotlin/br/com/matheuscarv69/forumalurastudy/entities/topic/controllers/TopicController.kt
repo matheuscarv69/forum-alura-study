@@ -57,25 +57,6 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
         return ResponseEntity.ok(TopicResponse(topicExists))
     }
 
-//    @PostMapping
-//    fun createTopic(@RequestBody @Valid request: TopicRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<Any> {
-//
-//        if ((request.courseId == COURSE.id) && (request.userId == AUTHOR.id)) {
-//            val topic = request.toModel(course = COURSE, author = AUTHOR)
-//
-//            topic.id = ID++
-//            topicsList.add(topic)
-//
-//            logger.info("Salving Topic: ${topic.id}, title: ${topic.title}")
-//
-//            val uri: URI = uriBuilder.path("/api/topics/{topicId}").buildAndExpand(topic.id).toUri()
-//
-//            return ResponseEntity.created(uri).build()
-//        }
-//
-//        return ResponseEntity.badRequest().body("This course Id or author Id are incorrect")
-//    }
-
     @PutMapping("/{id}")
     fun updateTopic(@PathVariable id: Long, @RequestBody @Valid request: UpdateTopicRequest): ResponseEntity<Any> {
 
