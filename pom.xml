@@ -96,6 +96,18 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <!-- plugin for jpa: this is necessary for don't create secondary constructor because JPA and hibernate-->
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <version>${kotlin.version}</version>
+
+                <configuration>
+                    <compilerPlugins>
+                        <plugin>jpa</plugin>
+                    </compilerPlugins>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
