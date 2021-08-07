@@ -25,7 +25,6 @@ class Topic(
     @Column(nullable = false)
     var message: String,
 
-    @field:FutureOrPresent
     @Column(nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
 

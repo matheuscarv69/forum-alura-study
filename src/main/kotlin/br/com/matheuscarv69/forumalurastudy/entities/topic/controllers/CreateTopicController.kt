@@ -33,13 +33,8 @@ class CreateTopicController(
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<Any> {
 
-        val course = courseRepository.findById(request.courseId).orElseThrow {
-            CourseNotFoundException("This Course ID: ${request.courseId} not found")
-        }
-
-        val author = userRepository.findById(request.authorId).orElseThrow {
-            AuthorNotFoundException("This Author ID: ${request.authorId} not found")
-        }
+        val course = courseRepository.findById(request.courseId).get()
+        val author = userRepository.findById(request.authorId).get()
 
         request.toModel(course, author).let { topic ->
             logger.info("Salving Topic: ${topic.id}, title: ${topic.title}")
