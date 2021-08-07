@@ -4,7 +4,6 @@ import br.com.matheuscarv69.forumalurastudy.entities.course.model.Course
 import br.com.matheuscarv69.forumalurastudy.entities.user.model.User
 import java.time.LocalDateTime
 import javax.persistence.*
-import javax.validation.constraints.FutureOrPresent
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
@@ -38,6 +37,6 @@ class Topic(
     @Column(nullable = false)
     val status: StatusTopic = StatusTopic.NOT_ANSWERED,
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", fetch = FetchType.EAGER)
     val answers: MutableList<Answer> = ArrayList()
 )

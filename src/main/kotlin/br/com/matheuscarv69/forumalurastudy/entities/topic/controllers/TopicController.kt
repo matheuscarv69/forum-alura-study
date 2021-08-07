@@ -43,20 +43,6 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
         return ResponseEntity.ok(listOfTopics)
     }
 
-    @GetMapping("/{id}")
-    fun findTopicById(@PathVariable("id") id: Long): ResponseEntity<TopicResponse> {
-
-        val topicExists = topicsList.stream().filter { topic ->
-            topic.id == id
-        }.findFirst().orElseThrow {
-            logger.info("This topic Id: $id not found")
-            TopicNotFoundException("This Topic ID: $id not found")
-        }
-
-        logger.info("This topic Id: $id found")
-        return ResponseEntity.ok(TopicResponse(topicExists))
-    }
-
     @PutMapping("/{id}")
     fun updateTopic(@PathVariable id: Long, @RequestBody @Valid request: UpdateTopicRequest): ResponseEntity<Any> {
 
