@@ -36,23 +36,6 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
         )
     }
 
-    @PutMapping("/{id}")
-    fun updateTopic(@PathVariable id: Long, @RequestBody @Valid request: UpdateTopicRequest): ResponseEntity<Any> {
-
-        topicsList.stream().filter { topic ->
-            topic.id == id
-        }.findFirst().orElseThrow {
-            logger.info("This topic Id: $id not found")
-            TopicNotFoundException("This Topic ID: $id not found")
-        }.let { topicExists ->
-            logger.info("Topic id: $id found and update for Topic title: ${request.title}, message: ${request.message}")
-            topicExists.title = request.title
-            topicExists.message = request.message
-            return ResponseEntity.ok().build()
-        }
-
-    }
-
     @DeleteMapping("/{id}")
     fun deleteTopic(@PathVariable id: Long): ResponseEntity<Any> {
 

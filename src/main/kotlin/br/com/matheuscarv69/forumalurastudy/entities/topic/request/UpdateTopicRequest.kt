@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 data class UpdateTopicRequest(
+
     @field:NotBlank
     @field:Size(min = 5, max = 100)
     val title: String,
@@ -11,6 +12,4 @@ data class UpdateTopicRequest(
     @field:NotBlank
     @field:Size(min = 5, max = 1000)
     val message: String,
-) {
-
-}
+)

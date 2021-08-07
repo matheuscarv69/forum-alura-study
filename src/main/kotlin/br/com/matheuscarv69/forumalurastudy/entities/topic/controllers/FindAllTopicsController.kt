@@ -30,6 +30,7 @@ class FindAllTopicsController(
     ): Page<TopicResponse> {
 
         val topicList = topicRepository.findAll(pageable).map { topic ->
+            logger.info("Get all topics")
             TopicResponse(topic)
         }
 
