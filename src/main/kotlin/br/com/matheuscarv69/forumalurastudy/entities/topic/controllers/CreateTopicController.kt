@@ -1,7 +1,5 @@
 package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 
-import br.com.matheuscarv69.forumalurastudy.configs.exception.AuthorNotFoundException
-import br.com.matheuscarv69.forumalurastudy.configs.exception.CourseNotFoundException
 import br.com.matheuscarv69.forumalurastudy.entities.course.repository.CourseRepository
 import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepository
 import br.com.matheuscarv69.forumalurastudy.entities.topic.request.TopicRequest
