@@ -36,13 +36,6 @@ class TopicController(private var topicsList: MutableList<Topic> = ArrayList()) 
         )
     }
 
-    @GetMapping
-    fun toListTopic(): ResponseEntity<List<TopicResponse>> {
-        val listOfTopics = topicsList.map { topic -> TopicResponse(topic) }
-
-        return ResponseEntity.ok(listOfTopics)
-    }
-
     @PutMapping("/{id}")
     fun updateTopic(@PathVariable id: Long, @RequestBody @Valid request: UpdateTopicRequest): ResponseEntity<Any> {
 
