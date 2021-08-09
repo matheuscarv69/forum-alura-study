@@ -4,6 +4,7 @@ import br.com.matheuscarv69.forumalurastudy.entities.topic.request.TopicRequest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -12,6 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.web.client.RestClientException
 import java.net.URI
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -27,7 +29,7 @@ internal class CreateTopicControllerTest(
 
     /**
      * 1. happy path - create topic - ok
-     * 2. Don't create topic
+     * 2. Don't create topic when fields are invalids
      * 3.
      * */
 
@@ -55,6 +57,37 @@ internal class CreateTopicControllerTest(
             assertNotNull(response)
             assertEquals(HttpStatus.CREATED.value(), response.statusCode.value())
         }
+
+    }
+
+    @Test
+    fun `Don't should create topic`(){
+        // scenery
+        val uri = URI("http://localhost:$randomServerPort/api/topics")
+        val request = TopicRequest(
+            title = "How the scope functions it works?",
+            message = "How do let and apply work?",
+            courseId = 1L,
+            authorId = 3L
+        )
+
+        // actions
+
+
+        val errors = assertThrows<RestClientException> {
+            client.postForEntity(
+                uri,
+                request,
+                ResponseEntity::class.java
+            )
+        }
+
+
+        // validations
+//        with(errors) {
+//            assertNotNull(errors)
+//            assertEquals(HttpStatus.BAD_REQUEST.value(), errors.)
+//        }
 
     }
 

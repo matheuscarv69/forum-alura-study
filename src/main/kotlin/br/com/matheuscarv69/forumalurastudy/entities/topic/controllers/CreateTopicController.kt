@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
 import java.net.URI
+import javax.transaction.Transactional
 import javax.validation.Valid
 
 
@@ -26,6 +27,7 @@ class CreateTopicController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
+    @Transactional
     fun createTopic(
         @RequestBody @Valid request: TopicRequest,
         uriBuilder: UriComponentsBuilder

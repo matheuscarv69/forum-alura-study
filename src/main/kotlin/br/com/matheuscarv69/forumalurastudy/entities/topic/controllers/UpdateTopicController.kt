@@ -6,6 +6,7 @@ import br.com.matheuscarv69.forumalurastudy.entities.topic.request.UpdateTopicRe
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.transaction.Transactional
 
 @RestController
 @RequestMapping("/api/topics")
@@ -16,6 +17,7 @@ class UpdateTopicController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @PutMapping("/{topicId}")
+    @Transactional
     fun updateTopic(
         @PathVariable topicId: Long,
         @RequestBody request: UpdateTopicRequest
