@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort.Direction.ASC
 import org.springframework.data.web.PageableDefault
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
@@ -21,6 +22,7 @@ class FindAllTopicsController(
 
     @GetMapping
     fun findAllTopics(
+        @RequestParam(required = false) courseName: String?,
         @PageableDefault(
             page = 0,
             size = 10,
@@ -29,12 +31,20 @@ class FindAllTopicsController(
         ) pageable: Pageable
     ): Page<TopicResponse> {
 
-        logger.info("Get all topics")
-        val topicList = topicRepository.findAll(pageable).map { topic ->
-            TopicResponse(topic)
+        if (courseName == null) {
+            logger.info("Get all topics")
+            return topicRepository
+                .findAll(pageable)
+                .map { topic ->
+                    TopicResponse(topic)
+                }
         }
 
-        return topicList
+        return topicRepository
+            .findByCourseName(courseName, pageable)
+            .map { topic ->
+                TopicResponse(topic)
+            }
     }
 
 }
