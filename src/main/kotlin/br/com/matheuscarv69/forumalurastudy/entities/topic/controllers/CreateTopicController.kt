@@ -5,6 +5,7 @@ import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepos
 import br.com.matheuscarv69.forumalurastudy.entities.topic.request.TopicRequest
 import br.com.matheuscarv69.forumalurastudy.entities.user.repository.UserRepository
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -28,6 +29,7 @@ class CreateTopicController(
 
     @PostMapping
     @Transactional
+    @CacheEvict(value = ["topicsList"], allEntries = true)
     fun createTopic(
         @RequestBody @Valid request: TopicRequest,
         uriBuilder: UriComponentsBuilder

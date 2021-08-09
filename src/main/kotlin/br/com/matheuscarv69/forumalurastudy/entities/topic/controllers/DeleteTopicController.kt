@@ -3,6 +3,7 @@ package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 import br.com.matheuscarv69.forumalurastudy.configs.exception.TopicNotFoundException
 import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepository
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,6 +21,7 @@ class DeleteTopicController(
 
     @DeleteMapping("/{topicId}")
     @Transactional
+    @CacheEvict(value = ["topicsList"], allEntries = true)
     fun deleteTopic(@PathVariable topicId: Long): ResponseEntity<Any> {
 
         topicRepository.findById(topicId).orElseThrow {

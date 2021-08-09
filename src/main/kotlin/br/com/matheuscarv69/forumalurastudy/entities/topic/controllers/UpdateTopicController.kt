@@ -4,6 +4,7 @@ import br.com.matheuscarv69.forumalurastudy.configs.exception.TopicNotFoundExcep
 import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepository
 import br.com.matheuscarv69.forumalurastudy.entities.topic.request.UpdateTopicRequest
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.transaction.Transactional
@@ -18,6 +19,7 @@ class UpdateTopicController(
 
     @PutMapping("/{topicId}")
     @Transactional
+    @CacheEvict(value = ["topicsList"], allEntries = true)
     fun updateTopic(
         @PathVariable topicId: Long,
         @RequestBody request: UpdateTopicRequest

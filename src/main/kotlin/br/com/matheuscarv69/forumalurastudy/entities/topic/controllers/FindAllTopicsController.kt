@@ -3,6 +3,7 @@ package br.com.matheuscarv69.forumalurastudy.entities.topic.controllers
 import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepository
 import br.com.matheuscarv69.forumalurastudy.entities.topic.response.TopicResponse
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort.Direction.ASC
@@ -21,6 +22,7 @@ class FindAllTopicsController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping
+    @Cacheable(value = ["topicsList"])
     fun findAllTopics(
         @RequestParam(required = false) courseName: String?,
         @PageableDefault(
