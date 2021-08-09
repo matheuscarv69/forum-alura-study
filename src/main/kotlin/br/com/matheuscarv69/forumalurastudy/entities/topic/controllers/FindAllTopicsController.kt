@@ -29,8 +29,8 @@ class FindAllTopicsController(
         ) pageable: Pageable
     ): Page<TopicResponse> {
 
+        logger.info("Get all topics")
         val topicList = topicRepository.findAll(pageable).map { topic ->
-            logger.info("Get all topics")
             TopicResponse(topic)
         }
 

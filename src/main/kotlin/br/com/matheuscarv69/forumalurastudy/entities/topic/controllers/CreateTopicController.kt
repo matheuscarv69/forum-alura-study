@@ -37,7 +37,7 @@ class CreateTopicController(
         val author = userRepository.findById(request.authorId).get()
 
         request.toModel(course, author).let { topic ->
-            logger.info("Salving Topic: ${topic.id}, title: ${topic.title}")
+            logger.info("Salving Topic: ${topic.title}")
 
             topicRepository.save(topic)
 

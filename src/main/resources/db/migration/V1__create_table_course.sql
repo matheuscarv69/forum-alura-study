@@ -1,9 +1,11 @@
-create table course
+create schema if not exists forum;
+
+create table forum.course
 (
-    id       bigint       not null,
+    id       bigserial    not null,
     name     varchar(100) not null unique,
     category varchar(100) not null,
     primary key (id)
 );
 
-insert into course(id, name, category) VALUES (1, 'Kotlin Formation', 'API REST - Kotlin Spring Boot - Web Layer');
+insert into forum.course(name, category) VALUES ('API REST - Kotlin Spring Boot - Web Layer', 'Kotlin Formation');
