@@ -26,7 +26,7 @@ class FindAllTopicsController(
         @PageableDefault(
             page = 0,
             size = 10,
-            sort = ["id"],
+            sort = ["createdAt"],
             direction = ASC
         ) pageable: Pageable
     ): Page<TopicResponse> {
