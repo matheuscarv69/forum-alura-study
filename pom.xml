@@ -16,7 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <kotlin.version>1.5.21</kotlin.version>
-<!--        <kotlin.version>1.4.31</kotlin.version>-->
+        <!--        <kotlin.version>1.4.31</kotlin.version>-->
     </properties>
     <dependencies>
         <dependency>
@@ -61,6 +61,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
@@ -111,7 +116,7 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-noarg</artifactId>
-<!--                        <version>${kotlin.version}</version> the version throw error (why?) -->
+                        <!--                        <version>${kotlin.version}</version> the version throw error (why?) -->
                     </dependency>
                 </dependencies>
             </plugin>

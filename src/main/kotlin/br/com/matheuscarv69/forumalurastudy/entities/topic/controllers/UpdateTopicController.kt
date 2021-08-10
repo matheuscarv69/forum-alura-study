@@ -19,7 +19,7 @@ class UpdateTopicController(
 
     @PutMapping("/{topicId}")
     @Transactional
-    @CacheEvict(value = ["topicsList"], allEntries = true)
+    @CacheEvict(value = ["topicsList", "findTopicById"], allEntries = true)
     fun updateTopic(
         @PathVariable topicId: Long,
         @RequestBody request: UpdateTopicRequest

@@ -4,6 +4,7 @@ import br.com.matheuscarv69.forumalurastudy.configs.exception.TopicNotFoundExcep
 import br.com.matheuscarv69.forumalurastudy.entities.topic.repository.TopicRepository
 import br.com.matheuscarv69.forumalurastudy.entities.topic.response.TopicResponse
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,7 +20,8 @@ class FindTopicByIdController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping("/{topicId}")
-    fun findTopicById(@PathVariable topicId: Long): ResponseEntity<Any> {
+    @Cacheable(value = ["findTopicById"])
+    fun findTopicById(@PathVariable topicId: Long): TopicResponse {
 
         val possibleTopic = topicRepository.findById(topicId).orElseThrow {
             logger.info("This topic Id: $topicId not found")
@@ -27,7 +29,8 @@ class FindTopicByIdController(
         }
 
         logger.info("This topic Id: $topicId found")
-        return ResponseEntity.ok(TopicResponse(possibleTopic))
+//        return ResponseEntity.ok(TopicResponse(possibleTopic))
+        return TopicResponse(possibleTopic)
     }
 
 

@@ -8,3 +8,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+
+  # cache-redis
+  redis:
+    image: 'redis'
+    ports:
+      - 6379:6379
