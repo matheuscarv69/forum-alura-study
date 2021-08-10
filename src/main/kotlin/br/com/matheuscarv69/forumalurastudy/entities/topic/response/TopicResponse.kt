@@ -9,21 +9,14 @@ import java.time.LocalDateTime
 
 data class TopicResponse(
 
-    @field:JsonProperty
-    val title: String?,
-    @field:JsonProperty
-    val message: String?,
+    val title: String,
+    val message: String,
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm", shape = JsonFormat.Shape.STRING)
-    @field:JsonProperty
-    val createdAt: LocalDateTime?,
-    @field:JsonProperty
-    val course: CourseResponse?,
-    @field:JsonProperty
-    val author: AuthorResponse?,
-    @field:JsonProperty
-    val status: String?,
-    @field:JsonProperty
-    val answer: List<AnswerResponse>? = ArrayList()
+    val createdAt: LocalDateTime,
+    val course: CourseResponse,
+    val author: AuthorResponse,
+    val status: String,
+    val answer: List<AnswerResponse> = ArrayList()
 ) {
 
     constructor(topic: Topic) : this(
