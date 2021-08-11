@@ -2,6 +2,7 @@ package br.com.matheuscarv69.forumalurastudy.entities.topic.response
 
 import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Answer
 import com.fasterxml.jackson.annotation.JsonFormat
+import java.io.Serializable
 import java.time.LocalDateTime
 
 data class AnswerResponse(
@@ -11,7 +12,7 @@ data class AnswerResponse(
     val author: AuthorResponse,
     val topicId: Long,
     val solution: Boolean
-) {
+): Serializable {
 
     constructor(answer: Answer) : this(
         message = answer.message,

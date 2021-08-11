@@ -2,9 +2,7 @@ package br.com.matheuscarv69.forumalurastudy.entities.topic.response
 
 import br.com.matheuscarv69.forumalurastudy.entities.topic.model.Topic
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonProperty
-import org.springframework.boot.jackson.JsonComponent
-import org.springframework.cache.annotation.Cacheable
+import java.io.Serializable
 import java.time.LocalDateTime
 
 data class TopicResponse(
@@ -17,7 +15,7 @@ data class TopicResponse(
     val author: AuthorResponse,
     val status: String,
     val answer: List<AnswerResponse> = ArrayList()
-) {
+) : Serializable {
 
     constructor(topic: Topic) : this(
         topic.title,

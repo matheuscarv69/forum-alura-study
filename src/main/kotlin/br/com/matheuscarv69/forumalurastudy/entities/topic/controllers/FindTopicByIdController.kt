@@ -20,8 +20,7 @@ class FindTopicByIdController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping("/{topicId}")
-    @Cacheable(value = ["findTopicById"])
-    fun findTopicById(@PathVariable topicId: Long): TopicResponse {
+    fun findTopicById(@PathVariable topicId: Long): ResponseEntity<TopicResponse> {
 
         val possibleTopic = topicRepository.findById(topicId).orElseThrow {
             logger.info("This topic Id: $topicId not found")
@@ -29,8 +28,7 @@ class FindTopicByIdController(
         }
 
         logger.info("This topic Id: $topicId found")
-//        return ResponseEntity.ok(TopicResponse(possibleTopic))
-        return TopicResponse(possibleTopic)
+        return ResponseEntity.ok(TopicResponse(possibleTopic))
     }
 
 
