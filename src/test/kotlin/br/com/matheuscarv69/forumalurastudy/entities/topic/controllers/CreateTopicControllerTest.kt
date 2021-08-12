@@ -16,79 +16,79 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.web.client.RestClientException
 import java.net.URI
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-@ActiveProfiles("test")
-internal class CreateTopicControllerTest(
-    @Autowired
-    val client: TestRestTemplate
-) {
-
-    @LocalServerPort
-    lateinit var randomServerPort: String
-
-
-    /**
-     * 1. happy path - create topic - ok
-     * 2. Don't create topic when fields are invalids
-     * 3.
-     * */
-
-
-    @Test
-    fun `Should create topic`() {
-        // scenery
-        val uri = URI("http://localhost:$randomServerPort/api/topics")
-        val request = TopicRequest(
-            title = "How the scope functions it works?",
-            message = "How do let and apply work?",
-            courseId = 1L,
-            authorId = 1L
-        )
-
-        // actions
-        val response = client.postForEntity(
-            uri,
-            request,
-            ResponseEntity::class.java
-        )
-
-        // validations
-        with(response) {
-            assertNotNull(response)
-            assertEquals(HttpStatus.CREATED.value(), response.statusCode.value())
-        }
-
-    }
-
-    @Test
-    fun `Don't should create topic`(){
-        // scenery
-        val uri = URI("http://localhost:$randomServerPort/api/topics")
-        val request = TopicRequest(
-            title = "How the scope functions it works?",
-            message = "How do let and apply work?",
-            courseId = 1L,
-            authorId = 3L
-        )
-
-        // actions
-
-
-        val errors = assertThrows<RestClientException> {
-            client.postForEntity(
-                uri,
-                request,
-                ResponseEntity::class.java
-            )
-        }
-
-
-        // validations
-//        with(errors) {
-//            assertNotNull(errors)
-//            assertEquals(HttpStatus.BAD_REQUEST.value(), errors.)
+//@SpringBootTest(webEnvironment = RANDOM_PORT)
+//@ActiveProfiles("test")
+//internal class CreateTopicControllerTest(
+//    @Autowired
+//    val client: TestRestTemplate
+//) {
+//
+//    @LocalServerPort
+//    lateinit var randomServerPort: String
+//
+//
+//    /**
+//     * 1. happy path - create topic - ok
+//     * 2. Don't create topic when fields are invalids
+//     * 3.
+//     * */
+//
+//
+//    @Test
+//    fun `Should create topic`() {
+//        // scenery
+//        val uri = URI("http://localhost:$randomServerPort/api/topics")
+//        val request = TopicRequest(
+//            title = "How the scope functions it works?",
+//            message = "How do let and apply work?",
+//            courseId = 1L,
+//            authorId = 1L
+//        )
+//
+//        // actions
+//        val response = client.postForEntity(
+//            uri,
+//            request,
+//            ResponseEntity::class.java
+//        )
+//
+//        // validations
+//        with(response) {
+//            assertNotNull(response)
+//            assertEquals(HttpStatus.CREATED.value(), response.statusCode.value())
 //        }
+//
+//    }
+//
+//    @Test
+//    fun `Don't should create topic`(){
+//        // scenery
+//        val uri = URI("http://localhost:$randomServerPort/api/topics")
+//        val request = TopicRequest(
+//            title = "How the scope functions it works?",
+//            message = "How do let and apply work?",
+//            courseId = 1L,
+//            authorId = 3L
+//        )
+//
+//        // actions
+//
+//
+//        val errors = assertThrows<RestClientException> {
+//            client.postForEntity(
+//                uri,
+//                request,
+//                ResponseEntity::class.java
+//            )
+//        }
+//
+//
+//        // validations
+////        with(errors) {
+////            assertNotNull(errors)
+////            assertEquals(HttpStatus.BAD_REQUEST.value(), errors.)
+////        }
+//
+//    }
 
-    }
-
-}
+//}
