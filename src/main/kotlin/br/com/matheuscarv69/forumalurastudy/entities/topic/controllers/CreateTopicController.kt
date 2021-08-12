@@ -29,7 +29,7 @@ class CreateTopicController(
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = ["topicsList", "findTopicById"], allEntries = true)
+    @CacheEvict(value = ["findAllTopics"], allEntries = true)
     fun createTopic(
         @RequestBody @Valid request: TopicRequest,
         uriBuilder: UriComponentsBuilder

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 import javax.transaction.Transactional
 
 @RestController
@@ -19,7 +20,7 @@ class UpdateTopicController(
 
     @PutMapping("/{topicId}")
     @Transactional
-    @CacheEvict(value = ["topicsList", "findTopicById"], allEntries = true)
+    @CacheEvict(value = ["findAllTopics"], allEntries = true)
     fun updateTopic(
         @PathVariable topicId: Long,
         @RequestBody request: UpdateTopicRequest
@@ -31,7 +32,6 @@ class UpdateTopicController(
             logger.info("Topic id: $topicId found and update for Topic title: ${request.title}, message: ${request.message}")
             topic.title = request.title
             topic.message = request.message
-
             topicRepository.save(topic)
             return ResponseEntity.ok().build()
         }

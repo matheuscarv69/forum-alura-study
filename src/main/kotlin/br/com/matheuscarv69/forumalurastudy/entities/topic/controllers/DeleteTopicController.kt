@@ -21,7 +21,7 @@ class DeleteTopicController(
 
     @DeleteMapping("/{topicId}")
     @Transactional
-    @CacheEvict(value = ["topicsList", "findTopicById"], allEntries = true)
+    @CacheEvict(value = ["findAllTopics"], allEntries = true)
     fun deleteTopic(@PathVariable topicId: Long): ResponseEntity<Any> {
 
         topicRepository.findById(topicId).orElseThrow {

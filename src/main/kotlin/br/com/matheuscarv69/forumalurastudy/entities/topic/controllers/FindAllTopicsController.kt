@@ -21,7 +21,7 @@ class FindAllTopicsController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping
-    @Cacheable(value = ["topicsList"])
+    @Cacheable(value = ["findAllTopics"])
     fun findAllTopics(
         @RequestParam(required = false) courseName: String?,
         @PageableDefault(
