@@ -10,3 +10,4 @@ interface TopicRepository : JpaRepository<Topic, Long> {
     fun findByCourseName(courseName: String, pageable: Pageable): Page<Topic>
 
 }
+

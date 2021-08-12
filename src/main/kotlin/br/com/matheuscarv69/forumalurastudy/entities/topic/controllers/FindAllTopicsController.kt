@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
 @RequestMapping("/api/topics")
 class FindAllTopicsController(
@@ -22,7 +21,7 @@ class FindAllTopicsController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping
-    @Cacheable(value = ["topicsList"])
+    @Cacheable(value = ["findAllTopics"])
     fun findAllTopics(
         @RequestParam(required = false) courseName: String?,
         @PageableDefault(
