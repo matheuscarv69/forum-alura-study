@@ -1,10 +1,32 @@
 version: '3'
+
 services:
+  # api-forum-alura-study
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: api-forum-alura-study
+    environment:
+      POSTGRES_HOST: postgres:5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_SCHEMA: forum
+      CACHE_HOST: redis
+      CACHE_PORT: 6379
+      CACHE_EXPIRATION: 10000
+    ports:
+       - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+
   #  database
   postgres:
     image: 'postgres:alpine'
+    container_name: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -12,5 +34,6 @@ services:
   # cache-redis
   redis:
     image: 'redis'
+    container_name: redis
     ports:
-      - 6379:6379
+      - "6379:6379"
