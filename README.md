@@ -82,6 +82,7 @@ As seguintes tecnologias foram utilizadas no desenvolvimento do projeto.
     - Profiles (dev e prod)
 - Flyway
 - Postgres
+- Redis
 - H2 Database
 
 ## ⚡ Flyway 👾
