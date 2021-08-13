@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 @Constraint(validatedBy = [UniqueValueValidator::class])
 @MustBeDocumented
 annotation class UniqueValue(
-    val message: String = "The value informed already exists in database, try again with other value",
+    val message: String = "\${unique.value.validation}",
     val groups: Array<KClass<Any>> = [],
     val payload: Array<KClass<Any>> = [],
     val fieldName: String,

@@ -10,7 +10,7 @@ data class CourseRequest(
     @field:UniqueValue(
         domainClass = Course::class,
         fieldName = "name",
-        message = "This Course's name informed already exists in database, try again with other Name"
+        message = "{course.name.already.exists}"
     )
     val name: String,
 

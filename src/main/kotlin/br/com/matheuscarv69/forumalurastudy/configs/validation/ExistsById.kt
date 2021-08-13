@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 @Constraint(validatedBy = [ExistsByIdValidator::class])
 @MustBeDocumented
 annotation class ExistsById(
-    val message: String = "This object already exists",
+    val message: String = "{exists.by.id}",
     val groups: Array<KClass<Any>> = [],
     val payload: Array<KClass<Payload>> = [],
     val fieldName: String = "id",

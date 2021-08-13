@@ -22,12 +22,12 @@ data class TopicRequest(
 
     @field:NotNull
     @field:Positive
-    @field:ExistsById(domainClass = Course::class, message = "This Course not exists")
+    @field:ExistsById(domainClass = Course::class, message = "{course.not.exists}")
     val courseId: Long,
 
     @field:NotNull
     @field:Positive
-    @field:ExistsById(domainClass = User::class, message = "This Author not exists")
+    @field:ExistsById(domainClass = User::class, message = "{author.not.exists}")
     val authorId: Long,
 
     ) {

@@ -15,7 +15,7 @@ data class UserRequest(
     @field:UniqueValue(
         domainClass = User::class,
         fieldName = "email",
-        message = "This Email informed already exists in database, try again with other email"
+        message = "{author.email.already.exists}"
     )
     val email: String
 ) {
